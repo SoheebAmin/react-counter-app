@@ -4,12 +4,20 @@ class Counter extends Component {
   // an object that contains any data the component needs.
   state = {
     count: 0,
-    imageUrl: "https://picsum.photos/200",
+    tags: ["tag1", "tag2", "tag3"],
   };
 
   styles = {
     fontSize: 10,
     fontWeight: "bold",
+  };
+
+  pretendProduct = { id: 1 };
+
+  // The arrow function fixes the "this" keyword to point to the object rather than the global window.
+  handleIncrement = (pretendProduct) => {
+    this.setState({ count: this.state.count + 1 }); // We can't just do this.state.count++ because we have get and set the state which modifies the virtual DOM.
+    console.log(pretendProduct);
   };
 
   render() {
@@ -19,7 +27,20 @@ class Counter extends Component {
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
-        <button className="btn btn-secondary btn-sm">Increment</button>
+        <ul>
+          {/* We can iterate over the tags list and generate the HTML list. Map
+          takes a fallback function where each "myVarforThisCallback" is put in
+          the list */}
+          {this.state.tags.map((myVarforThisCallback) => (
+            <li key={myVarforThisCallback}> {myVarforThisCallback} </li> // the key identifies the element in the list. If tag is object, can use tag.id
+          ))}
+        </ul>
+        <button
+          onClick={() => this.handleIncrement(this.pretendProduct)} // The arrow notation is a way to pass an argument to the function.
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
       </React.Fragment> // render must start and end with the same tag.
       // Also, can put div instead of React.Fragment, but this saves from generating extra div
     );
