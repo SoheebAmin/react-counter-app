@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+// This is the counter component before creating "counters", plus it has extra code to generate a list of tags amd passing a pretend product.
 
-class Counter extends Component {
+class CounterWithTags extends Component {
   // an object that contains any data the component needs.
   state = {
     count: 0,
@@ -14,8 +15,10 @@ class Counter extends Component {
 
   pretendProduct = { id: 1 };
 
-  handleIncrement = () => {
+  // The arrow function fixes the "this" keyword to point to the object rather than the global window.
+  handleIncrement = (pretendProduct) => {
     this.setState({ count: this.state.count + 1 }); // We can't just do this.state.count++ because we have get and set the state which modifies the virtual DOM.
+    console.log(pretendProduct);
   };
 
   render() {
@@ -25,6 +28,14 @@ class Counter extends Component {
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
+        <ul>
+          {/* We can iterate over the tags list and generate the HTML list. Map
+          takes a callback function where each "myVarforThisCallback" is put in
+          the list */}
+          {this.state.tags.map((myVarforThisCallback) => (
+            <li key={myVarforThisCallback}> {myVarforThisCallback} </li> // the key identifies the element in the list. If tag is object, can use tag.id
+          ))}
+        </ul>
         <button
           onClick={() => this.handleIncrement(this.pretendProduct)} // The arrow notation is a way to pass an argument to the function.
           className="btn btn-secondary btn-sm"
@@ -53,4 +64,4 @@ class Counter extends Component {
   }
 }
 
-export default Counter; //Note: Alternatively, you can put "export default" before "class Counter";
+export default CounterWithTags; //Note: Alternatively, you can put "export default" before "class";
