@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // This is the counter component before creating "counters", plus it has extra code to generate a list of tags amd passing a pretend product.
 
 class CounterWithTags extends Component {
-  // an object that contains any data the component needs.
+  // A component should not have a state if it is controlled by its parent.
   state = {
     count: 0,
     tags: ["tag1", "tag2", "tag3"],

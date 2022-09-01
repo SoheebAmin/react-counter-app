@@ -3,18 +3,12 @@ import React, { Component } from "react";
 class Counter extends Component {
   // an object that contains any data the component needs.
   state = {
-    value: this.props.value, //value is assigned in "counters" via the map method when rendered
+    value: this.props.counter.value, //value is assigned in "counters" via the map method when rendered
   };
 
   styles = {
     fontSize: 10,
     fontWeight: "bold",
-  };
-
-  pretendProduct = { id: 1 };
-
-  handleIncrement = () => {
-    this.setState({ value: this.state.value + 1 }); // We can't just do this.state.count++ because we have get and set the state which modifies the virtual DOM.
   };
 
   render() {
@@ -25,14 +19,14 @@ class Counter extends Component {
           {this.formatCount()}
         </span>
         <button
-          onClick={() => this.handleIncrement()} // The arrow notation is a way to pass an argument to the function. Nothing passed this time.
+          onClick={() => this.props.onIncrement(this.props.counter)} // The arrow notation is a way to pass an argument to the function. Nothing passed this time.
           className="btn btn-secondary btn-sm"
         >
           Increment
         </button>
         {/** We can't "handle delete" here! Delting would modify state in "compnentS" so that's where to do it. We can pass event with "on Method" */}
         <button
-          onClick={() => this.props.onDelete()} // "onDelete" is not really a function. Its a prop set in counters, which then calls "handleDelete"
+          onClick={() => this.props.onDelete(this.props.counter.id)} // "onDelete" is not really a function. Its a prop set in counters, which then calls "handleDelete"
           className="btn btn-danger btn-sm m-2"
         >
           Delete
@@ -45,7 +39,7 @@ class Counter extends Component {
 
   getBadgeClasses() {
     let classes = "badge m-2"; // this lets us make the class to add as a variable we can apply logic to
-    classes += this.state.value === 0 ? " bg-warning" : " bg-primary"; // based on count number, different class.
+    classes += this.props.counter === 0 ? " bg-warning" : " bg-primary"; // based on count number, different class.
     return classes;
   }
 
@@ -55,8 +49,8 @@ class Counter extends Component {
 
   // Note that this function is called within render() which is generating HTML, so it can return a JSX element which is an object.
   formatCount() {
-    const { value: count } = this.state;
-    return count === 0 ? "Zero" : count; // Returns a string right now, but I could make it <h1>zero</h1> if I wanted.
+    const { value } = this.props.counter;
+    return value === 0 ? "Zero" : value; // Returns a string right now, but I could make it <h1>zero</h1> if I wanted.
   }
 }
 
