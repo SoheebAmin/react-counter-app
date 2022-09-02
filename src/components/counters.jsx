@@ -13,7 +13,13 @@ class Counters extends Component {
   };
 
   // This resets all the counters by...
-  handleReset = () => {};
+  handleReset = () => {
+    const counters = this.state.counters.map((c) => {
+      c.value = 0;
+      return c;
+    });
+    this.setState({ counters });
+  };
 
   // The complex set-up here is to ensure that "counters" handle's "counter"'s data via its own state passed as props to state.
   handleIncrement = (counter) => {
@@ -38,7 +44,7 @@ class Counters extends Component {
           className="btn btn-primary btn-sm m2"
         >
           Reset
-        </button>{" "}
+        </button>
         <br />
         {/** We take each counter object in state and map it to a counter component, adding props to each one*/}
         {this.state.counters.map((counter) => (

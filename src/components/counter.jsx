@@ -39,7 +39,7 @@ class Counter extends Component {
 
   getBadgeClasses() {
     let classes = "badge m-2"; // this lets us make the class to add as a variable we can apply logic to
-    classes += this.props.counter === 0 ? " bg-warning" : " bg-primary"; // based on count number, different class.
+    classes += this.props.counter.value === 0 ? " bg-warning" : " bg-primary"; // based on count number, different class.
     return classes;
   }
 
