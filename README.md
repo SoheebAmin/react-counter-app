@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# React App to Practice main React Features
 
 This projcd ect was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)!
 
