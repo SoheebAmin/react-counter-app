@@ -17,10 +17,6 @@ class Counters extends Component {
         {/** We take each counter object in state and map it to a counter component, adding props to each one*/}
         {counters.map((counter) => (
           <Counter
-            // id={counter.id}
-            // value={counter.value}
-            // selected = {counter.selected}
-            // The above 3 are the old way where each attribute is assigned from the state above. We can simply to:
             counter={counter}
             key={counter.id}
             onDelete={onDelete} // this and next is "bubbling up" the prop to the App where state is. Duplicates whats in counter..
