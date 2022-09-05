@@ -6,7 +6,8 @@ class Counters extends Component {
 
   render() {
     // we can get rid of all "this.props." by object destructing like so:
-    const { onReset, counters, onDelete, onIncrement } = this.props;
+    const { onReset, counters, onDelete, onIncrement, onDecrement } =
+      this.props;
 
     return (
       <React.Fragment>
@@ -21,6 +22,7 @@ class Counters extends Component {
             key={counter.id}
             onDelete={onDelete} // this and next is "bubbling up" the prop to the App where state is. Duplicates whats in counter..
             onIncrement={onIncrement} // ...but no need to pass the actual argument when bubbling up.
+            onDecrement={onDecrement}
           >
             {/** any set properties (props) are accessible via this.props (except key) selected will intialize to "true" by default so can be shorted to just "selected"*/}
             <p> P is a child element of counter. Its between counter's tags</p>

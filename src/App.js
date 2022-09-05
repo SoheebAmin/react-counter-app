@@ -31,6 +31,14 @@ class App extends Component {
     this.setState({ counters }); // update the state to the new counters array. Again, this is short for {counters: counters}
   };
 
+  handleDecrement = (counter) => {
+    const counters = [...this.state.counters];
+    const indexOfCounter = counters.indexOf(counter);
+    counters[indexOfCounter] = { ...counter };
+    counters[indexOfCounter].value--;
+    this.setState({ counters });
+  };
+
   // This will get called by the prop "onDelete", added when mapping counters. onDelete is an event passed from counter when delete is clicked.
   handleDelete = (counterId) => {
     const counters = this.state.counters.filter((c) => c.id !== counterId);
@@ -48,6 +56,7 @@ class App extends Component {
             onReset={this.handleReset}
             onDelete={this.handleDelete}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
           ></Counters>
         </main>
       </React.Fragment>
